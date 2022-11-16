@@ -23,3 +23,10 @@ Reserves(sid, bid, day)
 1.	Find the names and ages of sailors with a rating above 7.
 2.	Find the sailor id, boat id, and reservation date for each reservation.
 3.	Find the names of the  sailors who reserved  a boat on 1-1-2022
+# zip(set-4)
+Consider the following relation:
+Employee (eno:integer, name:string, dept:string, salary:real, city:string)
+Answer the following queries in SQL:
+I.	Salary should not exceed more then Rs 55000 while entering the data. 
+II.	Find the details of all employees whose name contains second character as ‘a’ and name length should be 5
+III.	ii. Find the names of all employees who are living in city Vizag.
