@@ -1,0 +1,22 @@
+CREATE TABLE employee (
+  empNo VARCHAR(10) NOT NULL,
+  ename CHAR(40) NULL,
+  dept CHAR(40) NULL,
+  salary INT NULL,
+  PRIMARY KEY (empNo),
+  CHECK (SUBSTR(empNo,1,1) = 'E'));
+  
+INSERT INTO employee (empNo, ename, dept, salary) VALUES ('E1', 'Harsha','Cse','4700');
+INSERT INTO employee (empNo, ename, dept, salary) VALUES ('E2', 'Sri', 'Cse','5200');
+INSERT INTO employee (empNo, ename, dept, salary) VALUES ('E3', 'Bhaskhar', 'It','3800');
+INSERT INTO employee (empNo, ename, dept, salary) VALUES ('E4', 'Giri', 'Mech','4100');
+INSERT INTO employee (empNo, ename, dept, salary) VALUES ('E5', 'Chinmay', 'Eee','3700');
+INSERT INTO employee (empNo, ename, dept, salary) VALUES ('E6', 'Sanjay', 'Cse','3100');
+INSERT INTO employee (empNo, ename, dept, salary) VALUES ('E7', 'Bhavya', 'Mech','4200');
+INSERT INTO employee (empNo, ename, dept, salary) VALUES ('8', 'Bhagyaraj', 'Ece','6200');
+
+SELECT ename FROM employee 
+WHERE salary > 5000;
+
+SELECT ename FROM employee
+WHERE dept = 'Cse';
