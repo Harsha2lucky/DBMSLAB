@@ -7,14 +7,14 @@ CREATE TABLE employee (
   PRIMARY KEY (empNo),
   CHECK (salary <= 55000));
   
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('1', 'Harsha','Cse','47000', 'Vizag');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('2', 'Sri', 'Cse','52000', 'Bengaluru');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('3', 'Bhaskhar', 'It','38000', 'Vizianagaram');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('4', 'Giri', 'Mech','41000', 'Hyderabad');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('5', 'Chinmay', 'Eee','37000', 'Hyderabad');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('6', 'Sanjay', 'Cse','31000', 'Vizag');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('7', 'Bhavya', 'Mech','42000', 'Vizag');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('8', 'Bhagyaraj', 'Ece','62000','Vizag');
+INSERT INTO employee (empNo, ename, dept, salary, city) VALUES ('E1', 'Harsha','Cse','47000', 'Vizag');
+INSERT INTO employee (empNo, ename, dept, salary, city) VALUES ('E2', 'Sri', 'Cse','52000', 'Bengaluru');
+INSERT INTO employee (empNo, ename, dept, salary, city) VALUES ('E3', 'Bhaskhar', 'It','38000', 'Vizianagaram');
+INSERT INTO employee (empNo, ename, dept, salary, city) VALUES ('E4', 'Giri', 'Mech','41000', 'Hyderabad');
+INSERT INTO employee (empNo, ename, dept, salary, city) VALUES ('E5', 'Chinmay', 'Eee','37000', 'Hyderabad');
+INSERT INTO employee (empNo, ename, dept, salary, city) VALUES ('E6', 'Sanjay', 'Cse','31000', 'Vizag');
+INSERT INTO employee (empNo, ename, dept, salary, city) VALUES ('E7', 'Bhavya', 'Mech','42000', 'Vizag');
+INSERT INTO employee (empNo, ename, dept, salary, city) VALUES ('8', 'Bhagyaraj', 'Ece','62000', 'Vizag');
 
 SELECT * FROM employee 
 WHERE ename LIKE '_a___';
