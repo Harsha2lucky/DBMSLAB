@@ -1,0 +1,132 @@
+CREATE TABLE sailors(
+  sid INT NOT NULL,
+  sname CHAR(40) NULL,
+  rating INT NULL,
+  age INT NULL,
+  PRIMARY KEY (sid));
+  
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('1', 'Harsha', '8', '36');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('2', 'Bhaskar', '9', '32');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('3', 'Sanjay', '7', '37');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('4', 'Keerthan', '10', '39');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('5', 'Lubber', '10', '27');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('6', 'Ravi', '6', '23');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('7', 'Yash', '7', '29');
+  
+  CREATE TABLE boats(
+  bid INT NOT NULL,
+  bname CHAR(40) NULL,
+  color CHAR(20) NULL,
+  PRIMARY KEY (`bid`));
+  
+INSERT INTO boats (bid, bname, color) VALUES ('101', 'A', 'red');
+INSERT INTO boats (bid, bname, color) VALUES ('102', 'B', 'blue');
+INSERT INTO boats (bid, bname, color) VALUES ('103', 'C', 'green');
+INSERT INTO boats (bid, bname, color) VALUES ('104', 'D', 'yellow');
+INSERT INTO boats (bid, bname, color) VALUES ('105', 'E', 'white');
+
+  CREATE TABLE reserves(
+  sid INT NOT NULL,
+  bid INT NOT NULL,
+  day DATE NULL,
+  PRIMARY KEY (sid, bid));
+ 
+INSERT INTO reserves (sid, bid, day) VALUES ('1', '104', '2022-06-14');
+INSERT INTO reserves (sid, bid, day) VALUES ('1', '102', '2022-03-19');
+INSERT INTO reserves (sid, bid, day) VALUES ('3', '103', '2022-11-11');
+INSERT INTO reserves (sid, bid, day) VALUES ('5', '101', '2022-10-01');
+INSERT INTO reserves (sid, bid, day) VALUES ('5', '105', '2022-11-17');
+INSERT INTO reserves (sid, bid, day) VALUES ('6', '101', '2022-08-07');
+CREATE TABLE sailors(
+  sid INT NOT NULL,
+  sname CHAR(40) NULL,
+  rating INT NULL,
+  age INT NULL,
+  PRIMARY KEY (sid));
+  
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('1', 'Harsha', '8', '36');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('2', 'Bhaskar', '9', '32');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('3', 'Sanjay', '7', '37');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('4', 'Keerthan', '10', '39');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('5', 'Lubber', '10', '27');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('6', 'Ravi', '6', '23');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('7', 'Yash', '7', '29');
+  
+  CREATE TABLE boats(
+  bid INT NOT NULL,
+  bname CHAR(40) NULL,
+  color CHAR(20) NULL,
+  PRIMARY KEY (`bid`));
+  
+INSERT INTO boats (bid, bname, color) VALUES ('101', 'A', 'red');
+INSERT INTO boats (bid, bname, color) VALUES ('102', 'B', 'blue');
+INSERT INTO boats (bid, bname, color) VALUES ('103', 'C', 'green');
+INSERT INTO boats (bid, bname, color) VALUES ('104', 'D', 'yellow');
+INSERT INTO boats (bid, bname, color) VALUES ('105', 'E', 'white');
+
+  CREATE TABLE reserves(
+  sid INT NOT NULL,
+  bid INT NOT NULL,
+  day DATE NULL,
+  PRIMARY KEY (sid, bid));
+ 
+INSERT INTO reserves (sid, bid, day) VALUES ('1', '104', '2022-06-14');
+INSERT INTO reserves (sid, bid, day) VALUES ('1', '102', '2022-03-19');
+INSERT INTO reserves (sid, bid, day) VALUES ('3', '103', '2022-11-11');
+INSERT INTO reserves (sid, bid, day) VALUES ('5', '101', '2022-10-01');
+INSERT INTO reserves (sid, bid, day) VALUES ('5', '105', '2022-11-17');
+INSERT INTO reserves (sid, bid, day) VALUES ('6', '101', '2022-08-07');
+CREATE TABLE sailors(
+  sid INT NOT NULL,
+  sname CHAR(40) NULL,
+  rating INT NULL,
+  age INT NULL,
+  PRIMARY KEY (sid));
+  
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('1', 'Harsha', '8', '36');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('2', 'Bhaskar', '9', '32');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('3', 'Sanjay', '7', '37');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('4', 'Keerthan', '10', '39');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('5', 'Lubber', '10', '27');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('6', 'Ravi', '6', '23');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('7', 'Yash', '7', '29');
+  
+  CREATE TABLE boats(
+  bid INT NOT NULL,
+  bname CHAR(40) NULL,
+  color CHAR(20) NULL,
+  PRIMARY KEY (`bid`));
+  
+INSERT INTO boats (bid, bname, color) VALUES ('101', 'A', 'red');
+INSERT INTO boats (bid, bname, color) VALUES ('102', 'B', 'blue');
+INSERT INTO boats (bid, bname, color) VALUES ('103', 'C', 'green');
+INSERT INTO boats (bid, bname, color) VALUES ('104', 'D', 'yellow');
+INSERT INTO boats (bid, bname, color) VALUES ('105', 'E', 'white');
+
+  CREATE TABLE reserves(
+  sid INT NOT NULL,
+  bid INT NOT NULL,
+  day DATE NULL,
+  PRIMARY KEY (sid, bid));
+ 
+INSERT INTO reserves (sid, bid, day) VALUES ('1', '104', '2022-06-14');
+INSERT INTO reserves (sid, bid, day) VALUES ('1', '102', '2022-03-19');
+INSERT INTO reserves (sid, bid, day) VALUES ('3', '103', '2022-11-11');
+INSERT INTO reserves (sid, bid, day) VALUES ('5', '101', '2022-10-01');
+INSERT INTO reserves (sid, bid, day) VALUES ('5', '105', '2022-11-17');
+INSERT INTO reserves (sid, bid, day) VALUES ('6', '101', '2022-08-07');
+INSERT INTO reserves (sid, bid, day) VALUES ('6', '104', '2022-01-01');
+
+SELECT s.sname, s.age
+FROM Sailors AS s
+WHERE S.rating > 7;
+
+SELECT s.sname, r.bid, r.day 
+FROM Sailors s, Reserves r
+WHERE s.sid = r.sid; 
+
+SELECT s.sname
+FROM Sailors s
+WHERE s.sid IN(SELECT r.sid
+FROM Reserves r 
+WHERE r.day = '2022-01-01');
