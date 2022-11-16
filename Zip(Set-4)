@@ -1,20 +1,20 @@
 CREATE TABLE employee (
   empNo INT NOT NULL,
   ename CHAR(40) NULL,
-  salary INT NULL,
   dept CHAR(40) NULL,
+  salary INT NULL,
   city CHAR(40) NULL,
   PRIMARY KEY (empNo),
   CHECK (salary <= 55000));
   
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('1', 'Harsha', '47000', 'Cse', 'Vizag');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('2', 'Sri', '52000', 'Cse', 'Bengaluru');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('3', 'Bhaskhar', '38000', 'It', 'Vizianagaram');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('4', 'Giri', '41000', 'Mech', 'Hyderabad');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('5', 'Chinmay', '37000', 'Eee', 'Hyderabad');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('6', 'Sanjay', '31000', 'Cse', 'Vizag');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('7', 'Bhavya', '42000', 'Mech', 'Vizag');
-INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('8', 'Bhagyaraj', '62000', 'Ece', 'Vizag');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('1', 'Harsha','Cse','47000', 'Vizag');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('2', 'Sri', 'Cse','52000', 'Bengaluru');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('3', 'Bhaskhar', 'It','38000', 'Vizianagaram');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('4', 'Giri', 'Mech','41000', 'Hyderabad');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('5', 'Chinmay', 'Eee','37000', 'Hyderabad');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('6', 'Sanjay', 'Cse','31000', 'Vizag');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('7', 'Bhavya', 'Mech','42000', 'Vizag');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('8', 'Bhagyaraj', 'Ece','62000','Vizag');
 
 SELECT * FROM employee 
 WHERE ename LIKE '_a___';
