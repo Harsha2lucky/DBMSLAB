@@ -16,3 +16,10 @@ Identify the primary key in each relation.
 Q1 "Find the names of sailors who have reserved boat number 103"(correlated)
 Q2 "Find the names of sailors who have reserved a red boat"(nested)
 Q3 "Find the colors of boats reserved by Lubber"
+# zip(set-3)
+sailors(sid, sname, rating, age)           						
+Boats( Bid, Bname, Color)
+Reserves(sid, bid, day)
+1.	Find the names and ages of sailors with a rating above 7.
+2.	Find the sailor id, boat id, and reservation date for each reservation.
+3.	Find the names of the  sailors who reserved  a boat on 1-1-2022
