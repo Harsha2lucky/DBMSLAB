@@ -30,3 +30,9 @@ Answer the following queries in SQL:
 I.	Salary should not exceed more then Rs 55000 while entering the data. 
 II.	Find the details of all employees whose name contains second character as ‘a’ and name length should be 5
 III.	ii. Find the names of all employees who are living in city Vizag.
+# zip(set-5)
+Consider the following relation:								10M
+Employee(eno:integer, name:string, dept:integer,salary:real)
+All the eno should start with E while entering the data.
+i. Find the names of all employees whose salary is greater than 5000.
+ii. Find the names of all employees who are working in CSE dept.
