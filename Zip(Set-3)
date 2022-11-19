@@ -17,7 +17,7 @@ INSERT INTO sailors(sid, sname, rating, age) VALUES ('7', 'Yash', '7', '29');
   bid INT NOT NULL,
   bname CHAR(40) NULL,
   color CHAR(20) NULL,
-  PRIMARY KEY (`bid`));
+  PRIMARY KEY (bid));
   
 INSERT INTO boats (bid, bname, color) VALUES ('101', 'A', 'red');
 INSERT INTO boats (bid, bname, color) VALUES ('102', 'B', 'blue');
