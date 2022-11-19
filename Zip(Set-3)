@@ -29,7 +29,9 @@ INSERT INTO boats (bid, bname, color) VALUES ('105', 'E', 'white');
   sid INT NOT NULL,
   bid INT NOT NULL,
   day DATE NULL,
-  PRIMARY KEY (sid, bid));
+  PRIMARY KEY (sid, bid),
+  FOREIGN KEY (sid) REFERENCES sailors(sid),
+  FOREIGN KEY (bid) REFERENCES boats(bid));
  
 INSERT INTO reserves (sid, bid, day) VALUES ('1', '104', '2022-06-14');
 INSERT INTO reserves (sid, bid, day) VALUES ('1', '102', '2022-03-19');
@@ -38,6 +40,7 @@ INSERT INTO reserves (sid, bid, day) VALUES ('5', '101', '2022-10-01');
 INSERT INTO reserves (sid, bid, day) VALUES ('5', '105', '2022-11-17');
 INSERT INTO reserves (sid, bid, day) VALUES ('6', '101', '2022-08-07');
 INSERT INTO reserves (sid, bid, day) VALUES ('6', '104', '2022-01-01');
+INSERT INTO reserves (sid, bid, day) VALUES ('6', '103', '2022-01-01');
 
 SELECT s.sname, s.age
 FROM Sailors AS s
