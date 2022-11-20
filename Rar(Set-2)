@@ -1,0 +1,40 @@
+CREATE TABLE employee (
+  empNo INT NOT NULL,
+  ename CHAR(40) NULL,
+  age INT NULL,
+  salary INT NULL,
+  dept CHAR(40) NULL,
+  city CHAR(40) NULL,
+  PRIMARY KEY (empNo));
+  
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('1', 'Harsha', '18', '4700', 'Cse', 'Vizag');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('2', 'Sri', '19', '5200', 'Cse', 'Bengaluru');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('3', 'Bhaskhar', '21', '3800', 'It', 'Vizianagaram');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('4', 'Giri', '21', '4100', 'Mech', 'Hyderabad');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('5', 'Chinmay', '25', '3700', 'Eee', 'Hyderabad');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('6', 'Sanjay', '23', '3100', 'Cse', 'Vizag');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('7', 'Bhavya', '21', '4200', 'Mech', 'Vizag');
+INSERT INTO employee (empNo, ename, age, salary, dept, city) VALUES ('8', 'Bhagyaraj', '29', '6200', 'Ece', 'Vizag');
+
+SELECT COUNT(*) FROM employee WHERE dept = 'Cse';
+
+SELECT dept,SUM(salary) FROM employee 
+WHERE city = 'Vizag'
+GROUP BY dept;
+
+SELECT ename FROM employee 
+WHERE city LIKE 'V______%';
+
+#--PLSQL--#
+DECLARE
+    grade CHAR(2) := :grade;
+BEGIN
+    CASE grade
+        WHEN 'A' THEN dbms_output.put_line('Excellent');
+        WHEN 'B' THEN dbms_output.put_line('Very Good');
+        WHEN 'C' THEN dbms_output.put_line('Good');
+        WHEN 'D' THEN dbms_output.put_line('Fair');
+        WHEN 'E' THEN dbms_output.put_line('Fail');
+        ELSE dbms_output.put_line('No such Grade!');
+    END CASE;
+END;    
