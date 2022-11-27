@@ -1,0 +1,58 @@
+CREATE TABLE train (
+  trainno INT NOT NULL,
+  trainname VARCHAR(45) NULL,
+  available INT NULL,
+  src CHAR(40) NULL,
+  dest CHAR(40) NULL,
+  PRIMARY KEY (trainno));
+
+INSERT INTO train (trainno, trainname, available, src, dest) VALUES ('1', 'Shatabdhi', '139', 'Vizag', 'Delhi');
+INSERT INTO train (trainno, trainname, available, src, dest) VALUES ('2', 'Prashanthi', '215', 'Howrah', 'Bengaluru');
+INSERT INTO train (trainno, trainname, available, src, dest) VALUES ('3', 'Duranto', '177', 'Alepuzzah', 'Delhi');
+INSERT INTO train (trainno, trainname, available, src, dest) VALUES ('4', 'Rajdhani', '111', 'Delhi', 'Kerala');
+INSERT INTO train (trainno, trainname, available, src, dest) VALUES ('5', 'Garibradh', '89', 'Visakhapatnam', 'Hyderabad');
+
+CREATE TABLE passenger (
+  ticketno INT NOT NULL,
+  noofpassengers INT NULL,
+  totalfare INT NULL,
+  traveldate DATE NULL,
+  trainno INT NULL,
+  class VARCHAR(10) NULL,
+  PRIMARY KEY (ticketno),
+  FOREIGN KEY (trainno) REFERENCES train(trainno),
+  CHECK (class IN ('sc','ac1','ac2','ac3')));
+ 
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('1', '3', '150', '2022-10-10', '2', 'ac1');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('2', '8', '400', '2022-08-15', '4', 'ac3');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('3', '5', '250', '2022-07-12', '3', 'sc');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('4', '7', '350', '2022-05-13', '1', 'ac2');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('5', '18', '3218', '2022-07-14', '2', 'ac1');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('6', '21', '7890', '2022-08-11', '2', 'ac1');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('7', '11', '1250', '2022-09-19', '2', 'ac1');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('8', '7', '770', '2022-01-14', '2', 'sc');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('9', '2', '150', '2022-10-31', '2', 'ac1');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('10', '2', '100', '2022-08-31', '2', 'ac1');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('12', '2', '170', '2022-11-17', '2', 'ac2');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('13', '3', '170', '2022-11-18', '2', 'ac1');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('14', '4', '210', '2022-02-14', '2', 'sc');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('15', '4', '520', '2022-12-02', '2', 'ac1');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('16', '3', '640', '2022-11-10', '5', 'ac3');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('17', '4', '330', '2022-04-11', '2', 'ac1');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('18', '2', '180', '2022-11-18', '2', 'ac1');
+INSERT INTO passenger (ticketno, noofpassengers, totalfare, traveldate, trainno, class) VALUES ('19', '7', '520', '2022-11-18', '2', 'ac1');
+  
+CREATE VIEW details AS
+SELECT p.ticketno, t.trainname FROM passenger p
+INNER JOIN train t
+WHERE p.trainno = t.trainno AND src = 'Visakhapatnam' AND dest = 'Hyderabad';
+SELECT * FROM details;
+
+SELECT * FROM passenger
+ORDER BY traveldate;
+
+SELECT t.trainname FROM train t
+INNER JOIN passenger p
+WHERE t.trainno = p.trainno AND p.class = 'ac1'
+GROUP BY t.trainno
+HAVING COUNT(p.ticketno) > 10;
