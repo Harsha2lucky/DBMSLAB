@@ -63,3 +63,6 @@ where r.sid = s.sid and r.bid = 10);
 
 select count(distinct sname) as names from sailors;
 
+
+
+---- 2nd Question
