@@ -110,3 +110,26 @@ WHERE b.color = 'red'));
 SELECT b.color
 FROM Sailors s, Reserves r, Boats b
 WHERE s.sid = r.sid AND r.bid = b.bid AND s.sname = 'Lubber';
+
+
+#---3rd Question
+
+DECLARE
+    n NUMBER := :n;
+    q NUMBER := n;
+    result NUMBER := 0;
+    rem FLOAT ;
+BEGIN
+    WHILE q != 0
+    LOOP
+        rem := MOD(q,10);
+        result := (result*10)+rem;
+        q := TRUNC(q/10);
+    END LOOP;
+    IF result = n
+    THEN
+        dbms_output.put_line('It is a Palindrome');
+    ELSE
+        dbms_output.put_line('It is not a Palindrome');
+    END IF;
+END;
