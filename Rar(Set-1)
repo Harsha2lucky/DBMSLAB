@@ -1,0 +1,113 @@
+CREATE TABLE relation (
+  emp_id INT NOT NULL,
+  first_name CHAR(45) NULL,
+  last_name CHAR(45) NULL,
+  join_date DATE NULL,
+  manager_id INT NULL,
+  salary INT NULL,
+  dept_id INT NULL,
+  dept_name CHAR(45) NULL,
+  head CHAR(45) NULL,
+  dept_loc INT NULL,
+  loc_id INT NULL,
+  city CHAR(45) NULL);
+  
+  -- In 1NF derive a primary key
+  ALTER TABLE relation
+  ADD PRIMARY KEY (emp_id);
+  
+  -- In 2NF there should be no partial dependency (non-prime attr directly related to pk)
+  ALTER TABLE relation
+  DROP COLUMN dept_id;
+  ALTER TABLE relation
+  DROP COLUMN dept_name;
+  ALTER TABLE relation
+  DROP COLUMN head;
+  ALTER TABLE relation
+  DROP COLUMN dept_loc;
+  ALTER TABLE relation
+  DROP COLUMN loc_id;
+  ALTER TABLE relation
+  DROP COLUMN city;
+  
+  CREATE TABLE location (
+  loc_id INT NOT NULL,
+  city CHAR(45) NULL ,
+  PRIMARY KEY (loc_id));
+  
+  CREATE TABLE department (
+  dept_id INT NOT NULL,
+  dept_name CHAR(45) NULL,
+  head CHAR(45) NULL,
+  dept_loc INT NULL,
+  PRIMARY KEY (dept_id),
+  FOREIGN KEY (dept_loc) REFERENCES location(loc_id));
+  
+  # 2nd question
+  
+  CREATE TABLE suppliers (
+  sn CHAR(10) NOT NULL,
+  sname CHAR(45) NULL,
+  city CHAR(45) NULL,
+  PRIMARY KEY (sn));
+  
+INSERT INTO suppliers (sn, sname, city) VALUES ('S1', 'Dheeru', 'Bangalore');
+INSERT INTO suppliers (sn, sname, city) VALUES ('S2', 'Bunny', 'Vskp');
+INSERT INTO suppliers (sn, sname, city) VALUES ('S3', 'Hasi', 'Hyd');
+INSERT INTO suppliers (sn, sname, city) VALUES ('S4', 'Seethu', 'Chennai');
+INSERT INTO suppliers (sn, sname, city) VALUES ('S5', 'Sidhu', 'Mumbai');
+  
+  CREATE TABLE part (
+  pn CHAR(10) NOT NULL,
+  pname CHAR(45) NULL,
+  PRIMARY KEY (pn));
+  
+INSERT INTO part (pn, pname) VALUES ('P1', 'Nut');
+INSERT INTO part (pn, pname) VALUES ('P2', 'Bolt');
+INSERT INTO part (pn, pname) VALUES ('P3', 'Screw');
+INSERT INTO part (pn, pname) VALUES ('P4', 'Screw');
+INSERT INTO part (pn, pname) VALUES ('P5', 'Cam');
+  
+  CREATE TABLE supply (
+  sn CHAR(45) NOT NULL,
+  pn CHAR(45) NOT NULL,
+  qty INT NULL,
+  PRIMARY KEY (sn,pn),
+  FOREIGN KEY (sn) REFERENCES suppliers(sn),
+  FOREIGN KEY (pn) REFERENCES part(pn));
+  
+INSERT INTO supply (sn, pn, qty) VALUES ('S1', 'P1', '300');
+INSERT INTO supply (sn, pn, qty)VALUES ('S1', 'P2', '200');
+INSERT INTO supply (sn, pn, qty)VALUES ('S1', 'P3', '400');
+INSERT INTO supply (sn, pn, qty)VALUES ('S1', 'P4', '200');
+INSERT INTO supply (sn, pn, qty)VALUES ('S1', 'P5', '100');
+INSERT INTO supply (sn, pn, qty)VALUES ('S2', 'P1', '300');
+INSERT INTO supply (sn, pn, qty)VALUES ('S3', 'P2', '200');
+INSERT INTO supply (sn, pn, qty)VALUES ('S4', 'P2', '200');
+INSERT INTO supply (sn, pn, qty)VALUES ('S4', 'P4', '300');
+INSERT INTO supply (sn, pn, qty)VALUES ('S4', 'P5', '100');
+  
+  CREATE TABLE quantity (
+  pn CHAR(45) NOT NULL,
+  qty INT NULL,
+  PRIMARY KEY (pn),
+  FOREIGN KEY (pn) REFERENCES part(pn));
+  
+INSERT INTO quantity (pn, qty) VALUES ('P1', '110');
+INSERT INTO quantity (pn, qty) VALUES ('P2', '130');
+INSERT INTO quantity (pn, qty) VALUES ('P3', '80');
+INSERT INTO quantity (pn, qty) VALUES ('P4', '155');
+INSERT INTO quantity (pn, qty) VALUES ('P5', '162');
+
+SELECT pn,COUNT(sn) FROM supply
+GROUP BY pn;
+
+SELECT sn FROM supply
+WHERE qty = (SELECT MAX(qty) FROM supply)
+GROUP BY sn;
+
+SELECT COUNT(sn) FROM suppliers
+WHERE sn not in (SELECT sn FROM supply);
+
+# 3rd Question
+
