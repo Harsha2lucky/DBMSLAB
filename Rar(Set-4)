@@ -1,0 +1,129 @@
+CREATE TABLE relation (
+  emp_id INT NOT NULL,
+  first_name CHAR(45) NULL,
+  last_name CHAR(45) NULL,
+  join_date DATE NULL,
+  manager_id INT NULL,
+  salary INT NULL,
+  dept_id INT NULL,
+  dept_name CHAR(45) NULL,
+  head CHAR(45) NULL,
+  dept_loc INT NULL,
+  loc_id INT NULL,
+  city CHAR(45) NULL);
+  
+  -- In 1NF derive a primary key
+  ALTER TABLE relation
+  ADD PRIMARY KEY (emp_id);
+  
+  -- In 2NF there should be no partial dependency (non-prime attr directly related to pk)
+  ALTER TABLE relation
+  DROP COLUMN dept_id;
+  ALTER TABLE relation
+  DROP COLUMN dept_name;
+  ALTER TABLE relation
+  DROP COLUMN head;
+  ALTER TABLE relation
+  DROP COLUMN dept_loc;
+  ALTER TABLE relation
+  DROP COLUMN loc_id;
+  ALTER TABLE relation
+  DROP COLUMN city;
+  
+  CREATE TABLE location (
+  loc_id INT NOT NULL,
+  city CHAR(45) NULL ,
+  PRIMARY KEY (loc_id));
+  
+  CREATE TABLE department (
+  dept_id INT NOT NULL,
+  dept_name CHAR(45) NULL,
+  head CHAR(45) NULL,
+  dept_loc INT NULL,
+  PRIMARY KEY (dept_id),
+  FOREIGN KEY (dept_loc) REFERENCES location(loc_id));
+  
+  #-------2nd Question
+  
+  CREATE TABLE sailors(
+  sid INT NOT NULL,
+  sname CHAR(40) NULL,
+  rating INT NULL,
+  age INT NULL,
+  PRIMARY KEY (sid));
+  
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('1', 'Harsha', '8', '36');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('2', 'Bhaskar', '9', '32');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('3', 'Sanjay', '7', '37');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('4', 'Keerthan', '10', '39');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('5', 'Lubber', '10', '27');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('6', 'Ravi', '6', '23');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('7', 'Yash', '7', '29');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('8', 'Horatio', '7', '31');
+INSERT INTO sailors(sid, sname, rating, age) VALUES ('9', 'Horatio', '8', '37');
+  
+  CREATE TABLE boats(
+  bid INT NOT NULL,
+  bname CHAR(40) NULL,
+  color CHAR(20) NULL,
+  PRIMARY KEY (bid));
+  
+INSERT INTO boats (bid, bname, color) VALUES ('101', 'A', 'red');
+INSERT INTO boats (bid, bname, color) VALUES ('102', 'B', 'blue');
+INSERT INTO boats (bid, bname, color) VALUES ('103', 'C', 'green');
+INSERT INTO boats (bid, bname, color) VALUES ('104', 'D', 'yellow');
+INSERT INTO boats (bid, bname, color) VALUES ('105', 'E', 'white');
+
+  CREATE TABLE reserves(
+  sid INT NOT NULL,
+  bid INT NOT NULL,
+  day DATE NULL,
+  PRIMARY KEY (sid, bid),
+  FOREIGN KEY (sid) REFERENCES sailors(sid),
+  FOREIGN KEY (bid) REFERENCES boats(bid));
+ 
+INSERT INTO reserves (sid, bid, day) VALUES ('1', '104', '2022-06-14');
+INSERT INTO reserves (sid, bid, day) VALUES ('1', '102', '2022-03-19');
+INSERT INTO reserves (sid, bid, day) VALUES ('3', '103', '2022-11-11');
+INSERT INTO reserves (sid, bid, day) VALUES ('5', '101', '2022-10-01');
+INSERT INTO reserves (sid, bid, day) VALUES ('5', '105', '2022-11-17');
+INSERT INTO reserves (sid, bid, day) VALUES ('6', '101', '2022-08-07');
+INSERT INTO reserves (sid, bid, day) VALUES ('6', '104', '2022-01-01');
+INSERT INTO reserves (sid, bid, day) VALUES ('6', '103', '2022-01-01');
+
+SELECT s.sname FROM sailors s, reserves r1, reserves r2
+WHERE s.sid = r1.sid AND s.sid = r2.sid
+AND r1.day = r2.day AND r1.bid <> r2.bid;
+
+SELECT sname FROM sailors
+WHERE rating > ANY(SELECT rating FROM sailors
+WHERE sname = 'Horatio');
+
+SELECT sname FROM sailors
+WHERE rating > ALL(SELECT rating FROM sailors
+WHERE sname = 'Horatio');
+
+
+# ------- 3rd Question
+
+DECLARE 
+    n NUMBER;
+    y NUMBER;
+FUNCTION fact(n NUMBER)
+    RETURN NUMBER
+    IS 
+    f NUMBER;
+BEGIN
+    IF n >= 1 THEN
+        f := n*fact(n-1);
+    ELSE
+        f := 1;
+    END IF;
+RETURN f;
+END;
+
+BEGIN 
+    n := :n;
+    y := fact(n);
+    dbms_output.put_line('Factorial of '||n||' = '||y);
+END;
