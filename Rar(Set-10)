@@ -1,0 +1,49 @@
+CREATE TABLE student (
+  studentid INT NOT NULL,
+  studentname CHAR(40) NULL,
+  address VARCHAR(45) NULL,
+  contactnumber BIGINT NULL,
+  aggregate INT NULL,
+  PRIMARY KEY (studentid),
+  CHECK(aggregate > 10));
+  
+INSERT INTO student (studentid, studentname, address, contactnumber, aggregate) VALUES ('1', 'Harsha', '49-41-4,Akkayapalem', '8897992613', '80');
+INSERT INTO student (studentid, studentname, address, contactnumber, aggregate) VALUES ('2', 'Sri', '3-310,Gushini', '9751694132', '91');
+INSERT INTO student (studentid, studentname, address, contactnumber, aggregate) VALUES ('3', 'Chinmayi', '4-412-67', '9199052926', '78');
+INSERT INTO student (studentid, studentname, address, contactnumber, aggregate) VALUES ('4', 'Sanjay', 'A/8, Chintalavalasa', '7652741923', '51');
+INSERT INTO student (studentid, studentname, address, contactnumber, aggregate) VALUES ('5', 'Ravi', 'A-169/21, Madurawada', '7652841932', '83');
+
+CREATE TABLE book (
+  bookid INT NOT NULL,
+  book_name VARCHAR(45) NULL,
+  studentid INT NOT NULL,
+  issuedate DATE NULL,
+  validupto DATE NULL,
+  PRIMARY KEY (bookid, studentid),
+  FOREIGN KEY (studentid) REFERENCES student(studentid));
+  
+INSERT INTO book (bookid, book_name, studentid, issuedate, validupto) VALUES ('1', 'Hc Verma', '3', '2022-09-19', '2022-10-02');
+INSERT INTO book (bookid, book_name, studentid, issuedate, validupto) VALUES ('2', 'C Programming', '3', '2022-09-19', '2022-10-02');
+INSERT INTO book (bookid, book_name, studentid, issuedate, validupto) VALUES ('2', 'C Programming', '2', '2022-09-14', '2022-09-28');
+INSERT INTO book (bookid, book_name, studentid, issuedate, validupto) VALUES ('3', 'Database System Concepts', '4', '2022-07-15', '2022-07-29');
+INSERT INTO book (bookid, book_name, studentid, issuedate, validupto) VALUES ('3', 'Database System Concepts', '1', '2022-10-10', '2022-10-24');
+INSERT INTO book (bookid, book_name, studentid, issuedate, validupto) VALUES ('4', 'Database Management', '1', '2022-10-10', '2022-10-24');
+INSERT INTO book (bookid, book_name, studentid, issuedate, validupto) VALUES ('5', 'DBMS', '1', '2022-11-11', '2022-11-25');
+INSERT INTO book (bookid, book_name, studentid, issuedate, validupto) VALUES ('5', 'DBMS', '2', '2022-11-20', '2022-12-04');
+INSERT INTO book (bookid, book_name, studentid, issuedate, validupto) VALUES ('5', 'DBMS', '5', '2022-10-17', '2022-10-31');
+INSERT INTO book (bookid, book_name, studentid, issuedate, validupto) VALUES ('3', 'Database System Concepts', '5', '2022-10-17', '2022-10-31');
+
+CREATE VIEW dbsc AS
+SELECT s.studentname, s.address, s.contactnumber FROM student s
+INNER JOIN book b
+WHERE b.studentid = s.studentid AND b.book_name = 'Database System Concepts';
+SELECT * FROM dbsc;
+
+SELECT * FROM book
+ORDER BY issuedate;
+
+SELECT s.studentname FROM student s
+INNER JOIN book b
+WHERE s.aggregate >= 80 AND s.studentid = b.studentid AND b.book_name IN ('Database System Concepts', 'Database Management', 'DBMS')
+GROUP BY s.studentid
+HAVING COUNT(b.bookid) > 2 ; 
