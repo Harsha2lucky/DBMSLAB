@@ -1,0 +1,102 @@
+CREATE TABLE person (
+  driver_id VARCHAR(40) NOT NULL,
+  name CHAR(40) NULL,
+  address VARCHAR(40) NULL,
+  PRIMARY KEY (driver_id));
+  
+INSERT INTO person (driver_id, name, address) VALUES ('1', 'Harsha', '49-41-4,Akkayapalem');
+INSERT INTO person (driver_id, name, address) VALUES ('2', 'Giri', '3-31A');
+INSERT INTO person (driver_id, name, address) VALUES ('3', 'Ravi', '47/b,Madurwada');
+INSERT INTO person (driver_id, name, address) VALUES ('4', 'Sanjay', 'Chintalavalasa');
+INSERT INTO person (driver_id, name, address) VALUES ('5', 'Keerthan', '21-2A-09');
+
+  
+  CREATE TABLE car (
+  regno VARCHAR(45) NOT NULL,
+  model VARCHAR(45) NULL,
+  year INT NULL,
+  PRIMARY KEY (regno));
+  
+INSERT INTO car (regno, model, year) VALUES ('1A', 'Nexon', '2008');
+INSERT INTO car (regno, model, year)  VALUES ('2A', 'MG Hector', '2018');
+INSERT INTO car (regno, model, year)  VALUES ('3A', 'Swift', '2008');
+INSERT INTO car (regno, model, year)  VALUES ('4A', 'Benz', '2022');
+INSERT INTO car (regno, model, year)  VALUES ('5A', 'Audi', '2017');
+
+  
+CREATE TABLE accident (
+  report_no INT NOT NULL,
+  accd_date DATE NULL,
+  location CHAR(40) NULL,
+  PRIMARY KEY (report_no));
+  
+INSERT INTO accident (report_no, accd_date, location) VALUES ('1', '2008-10-28', 'Vizag');
+INSERT INTO accident (report_no, accd_date, location)  VALUES ('2', '2008-11-07', 'Hyderabad');
+INSERT INTO accident (report_no, accd_date, location)  VALUES ('3', '2016-11-04', 'Bangalore');
+INSERT INTO accident (report_no, accd_date, location)  VALUES ('4', '2019-11-04', 'Hyderabad');
+INSERT INTO accident (report_no, accd_date, location)  VALUES ('5', '2021-04-11', 'Delhi');
+
+
+CREATE TABLE owns (
+  driver_id VARCHAR(40) NOT NULL,
+  regno VARCHAR(45) NOT NULL,
+  PRIMARY KEY (driver_id,regno),
+  FOREIGN KEY (driver_id) REFERENCES person(driver_id),
+  FOREIGN KEY (regno) REFERENCES car(regno));
+  
+INSERT INTO owns (driver_id, regno) VALUES ('3', '1A');
+INSERT INTO owns (driver_id, regno) VALUES ('2', '2A');
+INSERT INTO owns (driver_id, regno) VALUES ('1', '5A');
+INSERT INTO owns (driver_id, regno) VALUES ('1', '3A');
+INSERT INTO owns (driver_id, regno) VALUES ('4', '4A');
+
+  
+  CREATE TABLE participated (
+	driver_id VARCHAR(40) NOT NULL,
+    regno VARCHAR(45) NOT NULL,
+    report_no INT NOT NULL,
+    damage_amt INT,
+    PRIMARY KEY (driver_id,regno,report_no),
+    FOREIGN KEY (driver_id) REFERENCES person(driver_id),
+	FOREIGN KEY (regno) REFERENCES car(regno),
+    FOREIGN KEY (report_no) REFERENCES accident(report_no));
+    
+INSERT INTO participated (driver_id, regno, report_no, damage_amt) VALUES ('3', '1A', '1', '33000');
+INSERT INTO participated (driver_id, regno, report_no, damage_amt) VALUES ('4', '4A', '2', '17000');
+INSERT INTO participated (driver_id, regno, report_no, damage_amt) VALUES ('2', '2A', '5', '73000');
+INSERT INTO participated (driver_id, regno, report_no, damage_amt) VALUES ('2', '2A', '4', '47000');
+INSERT INTO participated (driver_id, regno, report_no, damage_amt) VALUES ('3', '1A', '3', '18000');
+
+UPDATE participated
+set damage_amt = 25000
+where regno = '4A' and report_no = 2;
+    
+INSERT INTO accident (report_no, accd_date, location)  VALUES ('6', '2022-11-11', 'Hyderabad');   
+
+select count(distinct p.driver_id) from participated p, accident a  
+where year(a.accd_date) = 2008 
+and a.report_no = p.report_no;  
+
+select count(p.report_no) from participated p, car c  
+where p.regno = c.regno and c.model = 'Nexon';
+
+#---2nd question
+
+DECLARE
+  n NUMBER;
+  s NUMBER :=0 ;
+  t NUMBER;
+BEGIN
+  n := :n;
+  t := n;
+    WHILE t>0 LOOP
+        s := s+power((t mod 10),3);
+        t := trunc(t/10);
+    END LOOP;
+ 
+    IF  s=n THEN
+        dbms_output.put_line('The Given Number ' || n || ' is an Armstrong Number');
+    ELSE
+        dbms_output.put_line('The Given Number ' || n || ' is Not an Armstrong Number');
+    END IF;
+END;
