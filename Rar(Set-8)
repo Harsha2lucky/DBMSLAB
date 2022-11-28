@@ -1,0 +1,54 @@
+CREATE TABLE doctor (
+  doctorid INT NOT NULL,
+  doctorname CHAR(40) NULL,
+  specialization CHAR(40) NULL,
+  experience INT NULL,
+  contact BIGINT NULL,
+  PRIMARY KEY (doctorid));
+  
+INSERT INTO doctor (doctorid, doctorname, specialization, experience, contact) VALUES ('1', 'Harsha', 'Derma', '5', '8896979823');
+INSERT INTO doctor (doctorid, doctorname, specialization, experience, contact) VALUES ('2', 'Sri', 'Ortho', '7', '9751484283');
+INSERT INTO doctor (doctorid, doctorname, specialization, experience, contact) VALUES ('3', 'Giri', 'Neuro', '3', '9532171648');
+INSERT INTO doctor (doctorid, doctorname, specialization, experience, contact) VALUES ('4', 'Sanjay', 'Neuro', '5', '9878654132');
+
+ 
+ CREATE TABLE patient (
+  patientid INT NOT NULL,
+  patientname CHAR(40) NULL,
+  type CHAR(10) NULL,
+  doctortagged INT NULL,
+  age INT NULL,
+  visit DATE NULL,
+  PRIMARY KEY (patientid),
+  FOREIGN KEY (doctortagged) REFERENCES doctor(doctorid),
+  CHECK(type = 'in' or type= 'out'));
+  
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('1', 'Bhagya', 'in', '1', '23', '2022-11-11');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('2', 'Bhavya', 'out', '2', '22', '2022-10-07');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('3', 'Keerthan', 'in', '4', '37', '2022-07-17');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('4', 'Ravi', 'in', '3', '33', '2022-09-12');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('5', 'Yash', 'in', '3', '33', '2022-03-18');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('6', 'Mohan', 'out', '3', '27', '2022-07-02');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('7', 'Datta', 'out', '3', '48', '2022-05-16');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('8', 'Chinmayi', 'in', '3', '17', '2022-01-11');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('9', 'Bhaskhar', 'out', '3', '63', '2022-03-04');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('10', 'Teja', 'in', '3', '81', '2022-04-11');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('11','Kishore', 'in', '3', '34', '2022-08-23');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('12','Abhi', 'in', '3', '52', '2022-09-19');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('13','Raghu', 'out', '3', '33', '2022-04-03');
+INSERT INTO patient (patientid, patientname, type, doctortagged, age, visit) VALUES ('14','Kishore', 'in', '3', '25', '2022-09-18');
+
+CREATE VIEW orthopatients AS 
+SELECT * FROM patient p
+INNER JOIN doctor d
+WHERE DATEDIFF(CURDATE(), visit) > 31 AND p.doctortagged = d.doctorid AND d.specialization = 'Ortho';
+SELECT * FROM orthopatients;
+
+SELECT * FROM patient 
+ORDER BY visit;
+
+SELECT d.doctorid, d.doctorname FROM doctor d
+INNER JOIN patient p
+WHERE d.doctorid = p.doctortagged
+GROUP BY doctortagged
+HAVING COUNT(*) > 10;
