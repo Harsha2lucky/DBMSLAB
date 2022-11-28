@@ -52,3 +52,20 @@ INNER JOIN patient p
 WHERE d.doctorid = p.doctortagged
 GROUP BY doctortagged
 HAVING COUNT(*) > 10;
+
+
+
+
+DECLARE
+    x doctor.specialization%type;
+    y doctor.experience%type;
+BEGIN
+  for x in (select specialization, experience from doctor where (specialization = 'ortho' or specialization = 'pediatrician') and experience > 5)
+  LOOP
+  IF x.specialization = 'ortho' and x.experience > 10 THEN
+        UPDATE doctor SET salary = 50000;
+  ELSIF x.specialization = 'pediatrician' and x.experience > 5 THEN
+        UPDATE doctor SET salary = 90000;
+  END IF;
+  END LOOP;
+END;
